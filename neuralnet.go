@@ -2,13 +2,13 @@ package main
 
 import "math"
 
-const neuralLayers = 2;
-const outputNodes int = 1;
-const middleNodes int = 3;
-const inputNodes int = 2;
+const neuralLayers = 2
+const outputNodes int = 1
+const middleNodes int = 3
+const inputNodes int = 2
 
-const initialWeight float64 = 0.3;
-const initialThreshold float64 = 1.0;
+const initialWeight float64 = 0.3
+const initialThreshold float64 = 1.0
 
 func SetupNeuralNetwork() NeuronNetwork {
   layerSizes := []int{inputNodes,middleNodes,outputNodes}
@@ -41,7 +41,7 @@ func (n *Neuron) WeightedSigma(inputs []float64) float64 { // Sums inputs * weig
   for i := 0; i < len(inputs); i++ {
     sum += n.weights[i] * inputs[i]
   }
-  return sum;
+  return sum
 }
 
 func (n *Neuron) NonLinearFunc(value float64) float64 { // Applies non-linear function with threshold
