@@ -2,8 +2,8 @@ package main
 
 import "math"
 
-const startingCoefficient float64 = 3.0
-const coeffDecay float64 = 0.98
+const startingCoefficient float64 = 1.0
+const coeffDecay float64 = 1.0
 
 type BackPropogator struct {
   nn NeuronNetwork
@@ -12,7 +12,7 @@ type BackPropogator struct {
 }
 
 func (bp *BackPropogator) Propogate(output float64) {
-  err := (bp.expectedOutput - output)
+  err := (bp.expectedOutput - output) * (1 - output) * output;
   coeff := startingCoefficient * math.Pow(coeffDecay, float64(bp.iteration))
 
   errors := [3][3]float64{}
@@ -44,7 +44,7 @@ func (bp *BackPropogator) Propogate(output float64) {
         } else {
           input = bp.nn.neuronLayers[i - 1].neurons[k].output
         }
-        bp.nn.neuronLayers[i].neurons[j].weights[k] += coeff * errors[i][j] * math.Atan(input) * bp.nn.neuronLayers[i].neurons[j].output
+        bp.nn.neuronLayers[i].neurons[j].weights[k] += coeff * errors[i][j] * math.Atan(input)
       }
     }
   }
